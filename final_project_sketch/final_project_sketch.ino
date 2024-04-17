@@ -1,3 +1,11 @@
+//board setup
+#include <ArduinoBLE.h>
+
+// servo motor 
+#include <Servo.h>
+Servo myservo;
+int pos = 0;
+
 // utlrasonic sensor code
 const int trigPin = 8;
 const int echoPin = 10;
@@ -19,7 +27,10 @@ void setup() {
   lcd.begin(16,2);
   lcd.print("My name is:");
   lcd.setCursor(0,1);
-  lcd.print("NAME");
+  lcd.print("Pillys");
+
+  // servo code
+  myservo.attach(1);
 }
 
 void loop() {
@@ -40,5 +51,12 @@ void loop() {
   Serial.print(distanceInch);
   Serial.println(" in");
   delay(1000);
+
+  // servo code
+  if (distanceInch < 5) {
+    for (pos = 0; pos <= 180; pos +=1)
+      {myservo.write(pos);
+      delay(15);}
+  }
 
 }
