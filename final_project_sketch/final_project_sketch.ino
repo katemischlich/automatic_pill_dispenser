@@ -54,9 +54,8 @@ void loop() {
 
   // servo code
   if (distanceInch < 5) {
-    for (pos = 0; pos <= 180; pos +=1)
-      {myservo.write(pos);
-      delay(15);}
+    pos = pos + 360/7;
+    myservo.write(pos);
   }
 
 }
