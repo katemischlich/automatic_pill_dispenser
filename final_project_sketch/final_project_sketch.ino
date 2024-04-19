@@ -1,5 +1,6 @@
-//board setup
+//IoT
 #include <ArduinoBLE.h>
+//#include "thingProperties.h"
 
 // servo motor 
 #include <Servo.h>
@@ -31,6 +32,21 @@ void setup() {
 
   // servo code
   myservo.attach(1);
+
+  //IoT code
+  //Serial.begin(9600);
+
+ // delay(1500);
+ // initProperties();
+
+  //ArduinoCloud.begin(ArduinoIoTPreferredConnection);
+ // setDebugMessageLevel(2);
+  //ArduinoCloud.printDebugInfo();
+
+ // while (ArduinoCloud.connected() != 1) {
+   // ArduinoCloud.update();
+   // delay(500);
+ // }
 }
 
 void loop() {
@@ -53,9 +69,14 @@ void loop() {
   delay(1000);
 
   // servo code
-  if (distanceInch < 5) {
-    pos = pos + 360/7;
-    myservo.write(pos);
-  }
+  if (distanceInch < 8){
+   for (pos = 0; pos <= 180; pos += 1) {
+      myservo.write(pos);
+      delay(15); }
+    for (pos = 180; pos >= 0; pos -= 1) {
+      myservo.write(pos);
+      delay(15); }
+    delay(15000);
+      }
 
 }
