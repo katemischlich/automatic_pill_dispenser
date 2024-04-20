@@ -1,11 +1,12 @@
 //IoT
 #include <ArduinoBLE.h>
-//#include "thingProperties.h"
+#include "thingProperties.h"
 
 // servo motor 
 #include <Servo.h>
 Servo myservo;
 int pos = 0;
+int counter = 0;
 
 // utlrasonic sensor code
 const int trigPin = 8;
@@ -34,19 +35,19 @@ void setup() {
   myservo.attach(1);
 
   //IoT code
-  //Serial.begin(9600);
+  Serial.begin(9600);
 
- // delay(1500);
- // initProperties();
+  delay(1500);
+  initProperties();
 
-  //ArduinoCloud.begin(ArduinoIoTPreferredConnection);
- // setDebugMessageLevel(2);
-  //ArduinoCloud.printDebugInfo();
+  ArduinoCloud.begin(ArduinoIoTPreferredConnection);
+  setDebugMessageLevel(2);
+  ArduinoCloud.printDebugInfo();
 
- // while (ArduinoCloud.connected() != 1) {
-   // ArduinoCloud.update();
-   // delay(500);
- // }
+  while (ArduinoCloud.connected() != 1) {
+    ArduinoCloud.update();
+    delay(500);
+  }
 }
 
 void loop() {
@@ -77,6 +78,12 @@ void loop() {
       myservo.write(pos);
       delay(15); }
     delay(15000);
+    TimeSince = Time.hour()
       }
-
+  counter++;
+  if (counter > 200){
+    ArduinoCloud.update();
+    Serial.println(TimeSince);
+    counter = 0;
+  }
 }
