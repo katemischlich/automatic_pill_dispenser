@@ -1,13 +1,13 @@
 //IoT
 #include <ArduinoBLE.h>
 //#include "thingProperties.h"
-
+ 
 // servo motor
 #include <Servo.h>
 Servo myservo;
 int pos = 0;
 int counter = 0;
-
+ 
 //timer code
 unsigned long ss=84600, mm=0, hh=0;
  
@@ -27,7 +27,7 @@ void setup() {
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
   Serial.begin(9600);
-
+ 
   //LCD setup code
   lcd.begin(16,2);
   lcd.clear();
@@ -37,15 +37,13 @@ void setup() {
   lcd.print("Pillys");
   delay(5000);
   lcd.clear();
-
-
+ 
   // servo code
   myservo.attach(1);
  
   //IoT code
   //Serial.begin(9600);
-
-
+ 
   //delay(1500);
   //initProperties();
  
@@ -79,7 +77,7 @@ void loop() {
  
   // servo code
   if (distanceInch < 8){
-    for (pos = 90; pos >= 0; pos -= 1);
+    for (pos = 90; pos >= 0; pos -= 1){
       myservo.write(pos);
       delay(15); }
     for (pos = 0; pos <= 90; pos += 1){
@@ -100,7 +98,6 @@ void loop() {
   lcd.setCursor(0,1);
   lcd.print(ss);
   lcd.setCursor(7,1); lcd.print("seconds");
- 
   ss--;
   delay(950);
 }
